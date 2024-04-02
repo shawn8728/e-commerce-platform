@@ -3,6 +3,7 @@ import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
+  UserIcon,
   ShoppingBagIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
@@ -135,7 +136,7 @@ function Header() {
     <>
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
+        <Dialog as="div" className="relative z-40 lg:hidden" onClose={() => setOpen(false)}>
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
@@ -261,12 +262,13 @@ function Header() {
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
-                    <a
-                      href="#"
+                    <Link
+                      to="/login"
+                      onClick={() => setOpen(false)}
                       className="-m-2 block p-2 font-medium text-gray-900"
                     >
-                      Sign in
-                    </a>
+                      Log in
+                    </Link>
                   </div>
                 </div>
 
@@ -291,7 +293,7 @@ function Header() {
 
       <header className="sticky top-0 z-50 bg-white">
         <nav
-          aria-label="Top"
+          aria-label="Top"  
           className="mx-auto max-w-full px-4 sm:px-6 lg:px-8"
         >
           <div className="border-b border-gray-200">
@@ -435,12 +437,13 @@ function Header() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a
-                    href="#"
-                    className="text-base font-medium text-gray-700 hover:text-gray-800"
+                  <Link
+                    to="/login"
+                    className="p-2 text-gray-400 hover:text-gray-500"
                   >
-                    Sign in
-                  </a>
+                    <span className="sr-only">User</span>
+                    <UserIcon className="h-6 w-6" aria-hidden="true" />
+                  </Link>
                   <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                 </div>
 
