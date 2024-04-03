@@ -10,6 +10,8 @@ import {
 import { useCart } from '@/context/CartContext'
 import { Link } from 'react-router-dom'
 
+import SearchDrawer from '@/components/SearchDrawer'
+
 const navigation = {
   categories: [
     {
@@ -131,12 +133,17 @@ function classNames(...classes) {
 function Header() {
   const { openCart, cartQuantity } = useCart()
   const [open, setOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
 
   return (
     <>
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-40 lg:hidden" onClose={() => setOpen(false)}>
+        <Dialog
+          as="div"
+          className="relative z-40 lg:hidden"
+          onClose={() => setOpen(false)}
+        >
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
@@ -293,7 +300,7 @@ function Header() {
 
       <header className="sticky top-0 z-50 bg-white">
         <nav
-          aria-label="Top"  
+          aria-label="Top"
           className="mx-auto max-w-full px-4 sm:px-6 lg:px-8"
         >
           <div className="border-b border-gray-200">
@@ -463,13 +470,16 @@ function Header() {
 
                 {/* Search */}
                 <div className="flex lg:ml-6">
-                  <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
+                  <button
+                    className="p-2 text-gray-400 hover:text-gray-500"
+                    onClick={() => setSearchOpen(true)}
+                  >
                     <span className="sr-only">Search</span>
                     <MagnifyingGlassIcon
                       className="h-6 w-6"
                       aria-hidden="true"
                     />
-                  </a>
+                  </button>
                 </div>
 
                 {/* Cart */}
@@ -494,6 +504,7 @@ function Header() {
           </div>
         </nav>
       </header>
+      <SearchDrawer searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
     </>
   )
 }
