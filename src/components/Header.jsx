@@ -3,7 +3,6 @@ import { Popover, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
-  UserIcon,
   ShoppingBagIcon,
 } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
@@ -13,6 +12,7 @@ import { useCart } from '@/context/CartContext'
 
 import SearchDrawer from '@/components/SearchDrawer'
 import MobileMenu from '@/components/MobileMenu'
+import ecommerce from '@/assets/ecommerce.svg'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -90,8 +90,8 @@ function Header() {
                 <Link to="/">
                   <span className="sr-only">Your Company</span>
                   <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                    className="h-12 w-auto"
+                    src={ecommerce}
                     alt=""
                   />
                 </Link>
