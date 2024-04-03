@@ -1,18 +1,15 @@
 import { useEffect, useState } from 'react'
 import ProductList from '@/components/ProductList'
 
+import { useData } from '@/context/DataContext'
+
 function Home() {
+  const { getAllProducts } = useData()
   const [products, setProducts] = useState([])
 
   async function fetchData() {
-    try {
-      const response = await fetch('https://dummyjson.com/products?limit=0')
-      const data = await response.json()
+      const data = await getAllProducts()
       setProducts(data.products)
-      console.log('Products:', data)
-    } catch (error) {
-      console.error('Error fetching data:', error)
-    }
   }
 
   useEffect(() => {

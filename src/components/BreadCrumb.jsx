@@ -11,11 +11,11 @@ function BreadCrumb(props) {
         className="mx-auto flex max-w-2xl items-center px-4 sm:px-6 lg:max-w-7xl lg:px-8"
       >
         {breadCrumbs && breadCrumbs.map((element) => (
-          <li key={element.id}>
+          <li key={`breadcrumbs-${element.id}`}>
             <div className="flex items-center">
               <Link
                 to={`/${element.id}`}
-                className="text-sm font-medium text-gray-900 hover:text-gray-600"
+                className="text-sm font-medium text-gray-900 hover:text-gray-600 capitalize"
               >
                 {element.name}
               </Link>

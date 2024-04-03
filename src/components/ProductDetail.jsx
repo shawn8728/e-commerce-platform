@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom'
 import { StarIcon } from '@heroicons/react/20/solid'
 
 import { useCart } from '@/context/CartContext'
+import { useData } from '@/context/DataContext'
+
 import BreadCrumb from '@/components/BreadCrumb'
 
 function classNames(...classes) {
@@ -11,25 +13,21 @@ function classNames(...classes) {
 
 function ProductDetail() {
   const { addToCart } = useCart()
+  const { getSingleProduct } = useData()
+
   const { id } = useParams()
   const [product, setProduct] = useState({})
 
   const [active, setActive] = useState('')
 
-  async function fetchProduct() {
-    try {
-      const response = await fetch(`https://dummyjson.com/products/${id}`)
-      const data = await response.json()
-      setProduct(data)
-      setActive(data.images[0])
-      console.log('Product:', data)
-    } catch (error) {
-      console.error('Error fetching data:', error)
-    }
+  async function fetchData() {
+    const data = await getSingleProduct(id)
+    setProduct(data)
+    setActive(data.images[0])
   }
 
   useEffect(() => {
-    fetchProduct()
+    fetchData()
   }, [])
 
   return (
