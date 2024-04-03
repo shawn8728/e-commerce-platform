@@ -33,13 +33,12 @@ function BreadCrumb(props) {
           </li>
         ))}
         <li className="text-sm">
-          <a
-            // href={product.href}
+          <h1
             aria-current="page"
-            className="font-medium text-gray-500"
+            className="font-medium text-gray-500 capitalize"
           >
             {productName}
-          </a>
+          </h1>
         </li>
       </ol>
     </nav>
