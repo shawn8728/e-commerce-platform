@@ -1,11 +1,11 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import '@/assets/css/App.css'
 
-import Home from '@/pages/Home'
-import ProductDetail from '@/components/ProductDetail'
 import Header from '@/components/Header'
+import ProductDetail from '@/components/ProductDetail'
+import NotFound from '@/components/NotFound'
+import Home from '@/pages/Home'
 import Search from '@/pages/Search'
-import NotFound from '@/pages/NotFound'
 
 import { CartProvider } from '@/context/CartContext'
 

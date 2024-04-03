@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import ProductList from '@/components/ProductList'
 
 import { useData } from '@/context/DataContext'
+import NotFound from '@/components/NotFound'
 
 function Home() {
   const { getAllProducts, getCategoryProducts } = useData()
@@ -27,6 +28,7 @@ function Home() {
   return (
     <div className="bg-white">
       <ProductList products={products} />
+      {products.length === 0 && <NotFound />}
     </div>
   )
 }
