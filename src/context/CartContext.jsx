@@ -9,25 +9,38 @@ export function useCart() {
 
 export function CartProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false)
-  const [cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState(getInitialCart)
 
-  const cartQuantity = cartItems.reduce((total, item) => total + item.quantity, 0)
+  const cartQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  )
 
-  const openCart = () => {
+  function getInitialCart() {
+    const savedCartItems = localStorage.getItem('cartItems')
+    if (savedCartItems) {
+      return JSON.parse(savedCartItems)
+    }
+    return []
+  }
+
+  function openCart() {
     setIsOpen(true)
   }
 
-  const closeCart = () => {
+  function closeCart() {
     setIsOpen(false)
   }
 
-  const addToCart = (product) => {
+  function addToCart(product) {
     const existingProduct = cartItems.find((item) => item.id === product.id)
-    
+
     if (existingProduct) {
       setCartItems(
         cartItems.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
         )
       )
     } else {
@@ -35,26 +48,29 @@ export function CartProvider({ children }) {
     }
   }
 
-  const decrementQuantity = (product) => {
+  function decrementQuantity(product) {
     const existingProduct = cartItems.find((item) => item.id === product.id)
-    
+
     if (existingProduct.quantity === 1) {
       setCartItems(cartItems.filter((item) => item.id !== product.id))
     } else {
       setCartItems(
         cartItems.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item
+          item.id === product.id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
         )
       )
     }
   }
 
-  const removeFromCart = (product) => {
+  function removeFromCart(product) {
     setCartItems(cartItems.filter((item) => item.id !== product.id))
   }
 
   useEffect(() => {
-    console.log('Cart Items:', cartItems)
+    // Save cart items to local storage on change
+    localStorage.setItem('cartItems', JSON.stringify(cartItems))
   }, [cartItems])
 
   const value = {
