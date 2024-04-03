@@ -25,7 +25,7 @@ export function DataProvider({ children }) {
         `https://dummyjson.com/products/category/${categoryId}`
       )
       const data = await response.json()
-      return data
+      return data.products
     } catch (error) {
       console.error('Error fetching data:', error)
     }
@@ -33,7 +33,7 @@ export function DataProvider({ children }) {
 
   async function getAllCategories() {
     try {
-      const response = await fetch('https://dummyjson.com/categories')
+      const response = await fetch('https://dummyjson.com/products/categories')
       const data = await response.json()
       return data
     } catch (error) {
@@ -57,7 +57,7 @@ export function DataProvider({ children }) {
         `https://dummyjson.com/products/search?q=${searchQueue}`
       )
       const data = await response.json()
-      return data
+      return data.products
     } catch (error) {
       console.error('Error fetching data:', error)
     }

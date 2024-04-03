@@ -1,14 +1,15 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
   UserIcon,
   ShoppingBagIcon,
-  XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { useCart } from '@/context/CartContext'
 import { Link } from 'react-router-dom'
+
+import { useData } from '@/context/DataContext'
+import { useCart } from '@/context/CartContext'
 
 import SearchDrawer from '@/components/SearchDrawer'
 import MobileMenu from '@/components/MobileMenu'
@@ -132,13 +133,25 @@ function classNames(...classes) {
 }
 
 function Header() {
+  const { getAllCategories } = useData()
   const { openCart, cartQuantity } = useCart()
+
   const [open, setOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
+  const [categories, setCategories] = useState([])
+
+  async function fetchData() {
+    const data = await getAllCategories()
+    setCategories(data)
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <>
-      <MobileMenu open={open} setOpen={setOpen} navigation={navigation}/>
+      <MobileMenu open={open} setOpen={setOpen} navigation={navigation} />
 
       <header className="sticky top-0 z-50 bg-white">
         <nav
