@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import '@/assets/css/App.css'
 
 import Home from '@/pages/Home'
@@ -17,10 +17,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="products">
-          <Route path='search' element={<Search />} />
-          <Route path=":id" element={<ProductDetail />} />
+          <Route index element={<Navigate to="/" />} />
+          <Route path="search" element={<Search />} />
+          <Route path="product">
+            <Route path=":id" element={<ProductDetail />} />
+          </Route>
+          <Route path=":categoryId" element={<Home />} />
         </Route>
         <Route path="/login" element={<Login />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </CartProvider>

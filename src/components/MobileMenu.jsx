@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom'
 import { Dialog, Tab, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
 function MobileMenu(props) {
   const { open, setOpen, navigation } = props
 
@@ -11,7 +15,7 @@ function MobileMenu(props) {
       <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"
-          className="relative z-40 lg:hidden"
+          className="relative z-50 lg:hidden"
           onClose={() => setOpen(false)}
         >
           <Transition.Child
@@ -26,7 +30,7 @@ function MobileMenu(props) {
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
-          <div className="fixed inset-0 z-40 flex">
+          <div className="fixed inset-0 z-50 flex">
             <Transition.Child
               as={Fragment}
               enter="transition ease-in-out duration-300 transform"
@@ -53,7 +57,7 @@ function MobileMenu(props) {
                 <Tab.Group as="div" className="mt-2">
                   <div className="border-b border-gray-200">
                     <Tab.List className="-mb-px flex space-x-8 px-4">
-                      {navigation.categories.map((category) => (
+                      {navigation.map((category) => (
                         <Tab
                           key={category.name}
                           className={({ selected }) =>
@@ -71,67 +75,40 @@ function MobileMenu(props) {
                     </Tab.List>
                   </div>
                   <Tab.Panels as={Fragment}>
-                    {navigation.categories.map((category) => (
+                    {navigation.map((category) => (
                       <Tab.Panel
                         key={category.name}
                         className="space-y-10 px-4 pb-8 pt-10"
                       >
-                        <div className="grid grid-cols-2 gap-x-4">
-                          {category.featured.map((item) => (
-                            <div
-                              key={item.name}
-                              className="group relative text-sm"
-                            >
-                              <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                <img
-                                  src={item.imageSrc}
-                                  alt={item.imageAlt}
-                                  className="object-cover object-center"
-                                />
-                              </div>
-                              <a
-                                href={item.href}
-                                className="mt-6 block font-medium text-gray-900"
-                              >
-                                <span
-                                  className="absolute inset-0 z-10"
-                                  aria-hidden="true"
-                                />
-                                {item.name}
-                              </a>
-                              <p aria-hidden="true" className="mt-1">
-                                Shop now
-                              </p>
-                            </div>
-                          ))}
-                        </div>
                         {/* Categories */}
-                        {category.sections.map((section) => (
-                          <div key={section.name}>
-                            <p
-                              id={`${category.id}-${section.id}-heading-mobile`}
-                              className="font-medium text-gray-900"
-                            >
-                              {section.name}
-                            </p>
-                            <ul
-                              role="list"
-                              aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
-                              className="mt-6 flex flex-col space-y-6"
-                            >
-                              {section.items.map((item) => (
-                                <li key={item.name} className="flow-root">
-                                  <a
-                                    href={item.href}
-                                    className="-m-2 block p-2 text-gray-500"
-                                  >
-                                    {item.name}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
+                        <div key="Category">
+                          <p
+                            id={`${category.id}-Category-heading-mobile`}
+                            className="font-medium text-gray-900"
+                          >
+                            Category
+                          </p>
+                          <ul
+                            role="list"
+                            aria-labelledby={`${category.id}-Category-heading-mobile`}
+                            className="mt-6 flex flex-col space-y-6"
+                          >
+                            {category.sections.map((item) => (
+                              <li key={item} className="flow-root">
+                                <Link
+                                  to={`products/${
+                                    category.name == 'General'
+                                      ? item
+                                      : `${category.id}-${item}`
+                                  }`}
+                                  className="-m-2 block p-2 text-gray-500"
+                                >
+                                  {item}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </Tab.Panel>
                     ))}
                   </Tab.Panels>

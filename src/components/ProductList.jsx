@@ -13,7 +13,7 @@ function ProductList(props) {
           {products.map((product) => (
             <Link
               key={product.id}
-              to={`/products/${product.id}`}
+              to={`/products/product/${product.id}`}
               className="group"
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">

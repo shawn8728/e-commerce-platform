@@ -1,20 +1,28 @@
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import ProductList from '@/components/ProductList'
 
 import { useData } from '@/context/DataContext'
 
 function Home() {
-  const { getAllProducts } = useData()
+  const { getAllProducts, getCategoryProducts } = useData()
+  const { categoryId } = useParams()
+  
   const [products, setProducts] = useState([])
 
-  async function fetchData() {
+  async function fetchAllData() {
       const data = await getAllProducts()
       setProducts(data.products)
   }
 
+  async function fetchCategoryData() {
+    const data = await getCategoryProducts(categoryId)
+    setProducts(data)
+}
+
   useEffect(() => {
-    fetchData()
-  }, [])
+    categoryId ? fetchCategoryData() : fetchAllData()
+  }, [categoryId])
 
   return (
     <div className="bg-white">

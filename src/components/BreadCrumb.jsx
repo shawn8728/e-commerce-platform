@@ -14,7 +14,7 @@ function BreadCrumb(props) {
           <li key={`breadcrumbs-${element.id}`}>
             <div className="flex items-center">
               <Link
-                to={`/${element.id}`}
+                to={`/products/${element.id}`}
                 className="text-sm font-medium text-gray-900 hover:text-gray-600 capitalize"
               >
                 {element.name}

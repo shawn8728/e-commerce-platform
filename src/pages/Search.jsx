@@ -15,7 +15,6 @@ function Search() {
 
   async function fetchData() {
     const products = await searchProducts(searchQueue)
-    console.log(products)
     setProducts(products)
   }
 
