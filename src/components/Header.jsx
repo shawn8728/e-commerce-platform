@@ -186,13 +186,7 @@ function Header() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <Link
-                    to="/login"
-                    className="p-2 text-gray-400 hover:text-gray-500"
-                  >
-                    <span className="sr-only">User</span>
-                    <UserIcon className="h-6 w-6" aria-hidden="true" />
-                  </Link>
+                  <div className="p-2"></div>
                   <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                 </div>
 

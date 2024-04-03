@@ -2,7 +2,6 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import '@/assets/css/App.css'
 
 import Home from '@/pages/Home'
-import Login from '@/pages/Login'
 import ProductDetail from '@/components/ProductDetail'
 import Header from '@/components/Header'
 import Search from '@/pages/Search'
@@ -24,7 +23,6 @@ function App() {
           </Route>
           <Route path=":categoryId" element={<Home />} />
         </Route>
-        <Route path="/login" element={<Login />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
