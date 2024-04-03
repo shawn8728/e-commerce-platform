@@ -1,15 +1,18 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import  { useNavigate } from 'react-router-dom'
 import { XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 function SearchDrawer(props) {
-  const { searchOpen, setSearchOpen } = props
-  const [searchText, setSearchText] = useState('')
+  const navigate = useNavigate()
+  const { searchOpen, setSearchOpen, setSearch } = props
+  const [input, setInput] = useState('')
 
   function handleSearch(e) {
     e.preventDefault()
 
-    console.log(searchText)
+    navigate(`/products/search?q=${input}`)
+    setSearchOpen(false)
   }
 
   return (
@@ -89,7 +92,7 @@ function SearchDrawer(props) {
                             id="search"
                             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                             placeholder="Search"
-                            onChange={(e) => setSearchText(e.target.value)}
+                            onChange={(e) => setInput(e.target.value)}
                             required
                           />
                         </div>

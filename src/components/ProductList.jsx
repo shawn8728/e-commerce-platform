@@ -1,23 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
-function ProductList() {
-  const [products, setProducts] = useState([])
-
-  async function fetchData() {
-    try {
-      const response = await fetch('https://dummyjson.com/products?limit=0')
-      const data = await response.json()
-      setProducts(data.products)
-      console.log('Products:', data)
-    } catch (error) {
-      console.error('Error fetching data:', error)
-    }
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
+function ProductList(props) {
+  const { products } = props
 
   return (
     <div className="bg-white z-40">
@@ -28,7 +13,7 @@ function ProductList() {
           {products.map((product) => (
             <Link
               key={product.id}
-              to={`/product/${product.id}`}
+              to={`/products/${product.id}`}
               className="group"
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">

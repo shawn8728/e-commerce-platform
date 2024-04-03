@@ -6,6 +6,7 @@ import Login from '@/pages/Login'
 import ProductDetail from '@/components/ProductDetail'
 import Header from '@/components/Header'
 import { CartProvider } from '@/context/CartContext'
+import Search from '@/pages/Search'
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="product">
+        <Route path="products">
+          <Route path='search' element={<Search />} />
           <Route path=":id" element={<ProductDetail />} />
         </Route>
         <Route path="/login" element={<Login />} />
