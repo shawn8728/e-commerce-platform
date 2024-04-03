@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { StarIcon } from '@heroicons/react/20/solid'
 
 import { useCart } from '@/context/CartContext'
+import BreadCrumb from '@/components/BreadCrumb'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -35,79 +36,38 @@ function ProductDetail() {
     <div className="bg-white">
       <div className="pt-6">
         {/* {console.log('Product:', product.images[0])} */}
-        <nav aria-label="Breadcrumb">
-          <ol
-            role="list"
-            className="mx-auto flex max-w-2xl items-center px-4 sm:px-6 lg:max-w-7xl lg:px-8"
-          >
-            <li key={product.id}>
-              <div className="flex items-center">
-                <Link
-                  to="/"
-                  className="text-sm font-medium text-gray-900 hover:text-gray-600"
-                >
-                  All Products
-                </Link>
-                <svg
-                  width={16}
-                  height={20}
-                  viewBox="0 0 16 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                  className="mx-2 h-5 w-4 text-gray-300"
-                >
-                  <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                </svg>
-                <h1 className="text-sm capitalize font-medium text-gray-900">
-                  {product.category}
-                </h1>
-                <svg
-                  width={16}
-                  height={20}
-                  viewBox="0 0 16 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                  className="mx-2 h-5 w-4 text-gray-300"
-                >
-                  <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                </svg>
-              </div>
-            </li>
-            <li className="text-sm">
-              <a
-                // href={product.href}
-                aria-current="page"
-                className="font-medium text-gray-500"
-              >
-                {product.title}
-              </a>
-            </li>
-          </ol>
-        </nav>
+        <BreadCrumb
+          breadCrumbs={[
+            { id: '', name: 'Home' },
+            { id: product.category, name: product.category },
+          ]}
+          productName={product.title}
+        />
 
         {/* Image gallery */}
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-screen-xl lg:gap-x-8 lg:px-10">
-        <div className="flex flex-col gap-10">
-          <div className='flex justify-center'>
-            <img
-              className="h-auto w-full max-w-fit rounded-lg object-cover justify-center md:h-[480px]"
-              src={active}
-              alt=""
-            />
+          <div className="flex flex-col gap-10">
+            <div className="flex justify-center">
+              <img
+                className="h-auto w-full max-w-fit rounded-lg object-cover justify-center md:h-[480px]"
+                src={active}
+                alt=""
+              />
+            </div>
+            <div className="flex flex-row justify-between">
+              {Array.isArray(product.images) &&
+                product.images.map((url, index) => (
+                  <div key={index}>
+                    <img
+                      onClick={() => setActive(url)}
+                      src={url}
+                      className="h-40 w-40 max-w-fit cursor-pointer rounded-lg object-cover object-center"
+                      alt="gallery-image"
+                    />
+                  </div>
+                ))}
+            </div>
           </div>
-          <div className="flex flex-row justify-between">
-            { Array.isArray(product.images) && product.images.map((url, index) => (
-              <div key={index}>
-                <img
-                  onClick={() => setActive(url)}
-                  src={url}
-                  className="h-40 w-40 max-w-fit cursor-pointer rounded-lg object-cover object-center"
-                  alt="gallery-image"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
         </div>
 
         {/* Product info */}

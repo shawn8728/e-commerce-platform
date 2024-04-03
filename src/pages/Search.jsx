@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import ProductList from '@/components/ProductList'
+import BreadCrumb from '../components/BreadCrumb'
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -10,7 +11,9 @@ function Search() {
 
   async function fetchData() {
     try {
-      const response = await fetch(`https://dummyjson.com/products/search?q=${searchQueue}`)
+      const response = await fetch(
+        `https://dummyjson.com/products/search?q=${searchQueue}`
+      )
       const data = await response.json()
       setProducts(data.products)
       console.log('Products:', data)
@@ -25,7 +28,16 @@ function Search() {
 
   return (
     <div className="bg-white">
-      <ProductList products={products} />
+      <div className="pt-6">
+        <BreadCrumb
+          breadCrumbs={[{ id: '', name: 'Home' }]}
+          productName={`Search results for "${searchQueue}"`}
+        />
+        <h1 className="text-base text-center mt-4">
+            {products.length} Products
+        </h1>
+        <ProductList products={products} />
+      </div>
     </div>
   )
 }
