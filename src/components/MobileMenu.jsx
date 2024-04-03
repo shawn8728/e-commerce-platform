@@ -101,6 +101,7 @@ function MobileMenu(props) {
                                       ? item
                                       : `${category.id}-${item}`
                                   }`}
+                                  onClick={() => setOpen(false)}
                                   className="-m-2 block p-2 text-gray-500"
                                 >
                                   {item}

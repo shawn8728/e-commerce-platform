@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useRef } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
@@ -25,6 +25,7 @@ function Header() {
   const [open, setOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [categories, setCategories] = useState([])
+  const buttonRef = useRef()
 
   const navigation = [
     {
@@ -159,10 +160,13 @@ function Header() {
                                                     : `${category.id}-${item}`
                                                 }`}
                                                 className="hover:text-gray-800 capitalize"
-                                                onClick={() => setOpen(false)}
+                                                onClick={() =>
+                                                  buttonRef.current?.click()
+                                                }
                                               >
                                                 {item}
                                               </Link>
+                                              <Popover.Button ref={buttonRef} />
                                             </li>
                                           ))}
                                         </ul>
