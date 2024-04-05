@@ -35,7 +35,7 @@ function BreadCrumb(props) {
         <li className="text-sm">
           <h1
             aria-current="page"
-            className="font-medium text-gray-500 capitalize"
+            className="font-medium text-gray-500"
           >
             {productName}
           </h1>

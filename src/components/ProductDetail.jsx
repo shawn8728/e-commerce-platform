@@ -44,7 +44,7 @@ function ProductDetail() {
 
         {/* Image gallery */}
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-screen-xl lg:gap-x-8 lg:px-10">
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col space-y-10">
             <div className="flex justify-center">
               <img
                 className="h-auto w-full max-w-fit rounded-lg object-cover justify-center md:h-[480px]"
@@ -52,7 +52,7 @@ function ProductDetail() {
                 alt=""
               />
             </div>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row max-w-fit mx-auto space-x-10">
               {Array.isArray(product.images) &&
                 product.images.map((url, index) => (
                   <div key={index}>
@@ -92,9 +92,9 @@ function ProductDetail() {
               )}
             </p>
 
-            {/* Reviews */}
+            {/* Rating */}
             <div className="mt-6">
-              <h3 className="sr-only">Reviews</h3>
+              <h3 className="sr-only">Rating</h3>
               <div className="flex items-center">
                 <div className="flex items-center">
                   {[1, 2, 3, 4, 5].map((rating) => (
@@ -137,20 +137,6 @@ function ProductDetail() {
               <div className="space-y-6">
                 <p className="text-base text-gray-900">{product.description}</p>
               </div>
-            </div>
-
-            <div className="mt-10">
-              {/* <h3 className="text-sm font-medium text-gray-900">Highlights</h3> */}
-
-              {/* <div className="mt-4">
-                  <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                    {product.highlights.map((highlight) => (
-                      <li key={highlight} className="text-gray-400">
-                        <span className="text-gray-600">{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div> */}
             </div>
 
             <div className="mt-10">

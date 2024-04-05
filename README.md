@@ -1,5 +1,5 @@
 # E-Commerce Platform
-This project is built using React.js and Vite.
+This project is built using React.js, Vite and Tailwind CSS.
 
 
 # Getting Started
