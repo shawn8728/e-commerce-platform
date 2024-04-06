@@ -43,7 +43,7 @@ function ProductDetail() {
         />
 
         {/* Image gallery */}
-        <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-screen-xl lg:gap-x-8 lg:px-10">
+        <div className="mx-auto mt-6 px-4 max-w-2xl sm:px-6 lg:grid lg:max-w-screen-xl lg:gap-x-8 lg:px-10">
           <div className="flex flex-col space-y-10">
             <div className="flex justify-center">
               <img
@@ -52,14 +52,14 @@ function ProductDetail() {
                 alt=""
               />
             </div>
-            <div className="flex flex-row max-w-fit mx-auto space-x-10">
+            <div className="flex flex-row justify-center space-x-10">
               {Array.isArray(product.images) &&
                 product.images.map((url, index) => (
-                  <div key={index}>
+                  <div key={index} className="hidden sm:block">
                     <img
                       onClick={() => setActive(url)}
                       src={url}
-                      className="h-40 w-40 max-w-fit cursor-pointer rounded-lg object-cover object-center"
+                      className="size-40 lg:size-40 cursor-pointer rounded-lg object-cover object-center"
                       alt="gallery-image"
                     />
                   </div>
