@@ -12,23 +12,25 @@ import { CartProvider } from '@/context/CartContext'
 
 function App() {
   return (
-    <CartProvider>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="products">
-          <Route index element={<Navigate to="/" />} />
-          <Route path="search" element={<Search />} />
-          <Route path="product">
-            <Route path=":id" element={<ProductDetail />} />
+    <div className="flex flex-col min-h-screen">
+      <CartProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="products">
+            <Route index element={<Navigate to="/" />} />
+            <Route path="search" element={<Search />} />
+            <Route path="product">
+              <Route path=":id" element={<ProductDetail />} />
+            </Route>
+            <Route path=":categoryId" element={<Home />} />
           </Route>
-          <Route path=":categoryId" element={<Home />} />
-        </Route>
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </CartProvider>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </CartProvider>
+    </div>
   )
 }
 
