@@ -6,6 +6,7 @@ import ProductDetail from '@/components/ProductDetail'
 import NotFound from '@/components/NotFound'
 import Home from '@/pages/Home'
 import Search from '@/pages/Search'
+import Footer from '@/components/Footer'
 
 import { CartProvider } from '@/context/CartContext'
 
@@ -26,6 +27,7 @@ function App() {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </CartProvider>
   )
 }
